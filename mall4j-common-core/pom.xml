@@ -69,9 +69,6 @@
         <dependency>
             <groupId>cn.throwx</groupId>
             <artifactId>canal-glue-core</artifactId>
-            <version>1.0</version>
-            <scope>system</scope>
-            <systemPath>${pom.basedir}/lib/canal-glue-core.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>io.seata</groupId>

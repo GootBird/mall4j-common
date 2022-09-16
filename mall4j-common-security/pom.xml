@@ -17,16 +17,16 @@
             <artifactId>mall4j-common-core</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.xixi.mall</groupId>
-            <artifactId>mall4j-api-auth</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.xixi.mall</groupId>
-            <artifactId>mall4j-api-rabc</artifactId>
-            <version>${project.version}</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.xixi.mall</groupId>-->
+<!--            <artifactId>mall4j-api-auth</artifactId>-->
+<!--            <version>${project.version}</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>com.xixi.mall</groupId>-->
+<!--            <artifactId>mall4j-api-rabc</artifactId>-->
+<!--            <version>${project.version}</version>-->
+<!--        </dependency>-->
     </dependencies>
 
 </project>
