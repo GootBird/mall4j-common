@@ -46,14 +46,48 @@ public class ThrowUtils {
         throw getException(msg, args);
     }
 
-
-    public static void checkState(boolean bol, ResponseEnum errMsgEnum) {
+    /**
+     * 如果bol为true，不抛出异常 false反之
+     *
+     * @param bol        assertResult
+     * @param errMsgEnum 异常信息
+     */
+    public static void checkIsTrue(boolean bol, ResponseEnum errMsgEnum) {
         if (!bol) {
             throwErr(errMsgEnum);
         }
     }
 
-    public static void checkState(boolean bol, String errMsg, Object... args) {
+    /**
+     * 如果bol为true，不抛出异常 false反之
+     *
+     * @param bol    assertResult
+     * @param errMsg 异常信息
+     * @param args   参数
+     */
+    public static void checkIsTrue(boolean bol, String errMsg, Object... args) {
+        if (!bol) throwErr(errMsg, args);
+    }
+
+    /**
+     * 如果bol为false不抛出异常 true反之
+     *
+     * @param bol        assertResult
+     * @param errMsgEnum 异常信息
+     */
+    public static void checkIsFalse(boolean bol, ResponseEnum errMsgEnum) {
+        if (bol) throwErr(errMsgEnum);
+    }
+
+
+    /**
+     * 如果bol为false不抛出异常 true反之
+     *
+     * @param bol    assertResult
+     * @param errMsg 异常信息
+     * @param args   参数
+     */
+    public static void checkIsFalse(boolean bol, String errMsg, Object... args) {
         if (bol) throwErr(errMsg, args);
     }
 }
