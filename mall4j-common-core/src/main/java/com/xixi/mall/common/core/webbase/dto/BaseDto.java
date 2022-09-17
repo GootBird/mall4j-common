@@ -15,7 +15,7 @@ import java.util.Date;
 @Setter
 @Getter
 @ToString
-public class BaseDTO {
+public class BaseDto {
 
     /**
      * 创建时间

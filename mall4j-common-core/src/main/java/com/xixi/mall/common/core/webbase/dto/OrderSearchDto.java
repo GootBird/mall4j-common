@@ -12,7 +12,7 @@ import java.util.Date;
 @Setter
 @Getter
 @ToString
-public class OrderSearchDTO {
+public class OrderSearchDto {
 
     /**
      * 用户id

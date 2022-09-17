@@ -1,4 +1,4 @@
-package com.xixi.mall.common.database.bo;
+package com.xixi.mall.common.core.webbase.vo;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 @Setter
 @Getter
 @ToString
-public class PageBo {
+public class PageVo {
 
     /**
      * 当前页
