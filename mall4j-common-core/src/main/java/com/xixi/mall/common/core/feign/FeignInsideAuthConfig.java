@@ -23,8 +23,6 @@ public class FeignInsideAuthConfig {
      */
     public static final String FEIGN_URL = "/feign";
 
-    public static final String INSIDER_URL = "/insider";
-
     @Value("${feign.inside.key}")
     private String key;
 
