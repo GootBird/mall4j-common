@@ -3,6 +3,7 @@ package com.xixi.mall.common.core.utils;
 
 import com.xixi.mall.common.core.enums.ResponseEnum;
 import com.xixi.mall.common.core.exception.ProjectException;
+import com.xixi.mall.common.core.webbase.vo.ServerResponse;
 
 import java.util.function.Supplier;
 
@@ -29,6 +30,18 @@ public class ThrowUtils {
         throw getException(errMsgEnum, args);
     }
 
+    public static void throwErr(String code, String msg, Object... args) {
+        throw getException(code, msg, args);
+    }
+
+    public static void throwErr(String msg, Object... args) {
+        throw getException(msg, args);
+    }
+
+    public static void throwErr() {
+        throw getException(ResponseEnum.SHOW_FAIL);
+    }
+
     public static Supplier<ProjectException> getSupErr(ResponseEnum errMsgEnum, Object... args) {
         return () -> getException(errMsgEnum, args);
     }
@@ -37,14 +50,14 @@ public class ThrowUtils {
         return () -> getException(msg, args);
     }
 
-
-    public static void throwErr() {
-        throw getException(ResponseEnum.SHOW_FAIL);
+    public static Supplier<ProjectException> getSupErr(String code, String msg, Object... args) {
+        return () -> getException(code, msg, args);
     }
 
-    public static void throwErr(String msg, Object... args) {
-        throw getException(msg, args);
+    public static Supplier<ProjectException> getSupErr() {
+        return () -> getException(ResponseEnum.SHOW_FAIL);
     }
+
 
     /**
      * 如果bol为true，不抛出异常 false反之
@@ -90,4 +103,16 @@ public class ThrowUtils {
     public static void checkIsFalse(boolean bol, String errMsg, Object... args) {
         if (bol) throwErr(errMsg, args);
     }
+
+    /**
+     * 如果response是异常状态则抛出异常
+     *
+     * @param serverResponse resp
+     */
+    public static void throwErr(ServerResponse<?> serverResponse) {
+        if (serverResponse.unSuccess()) {
+            throwErr(serverResponse.getCode(), serverResponse.getMsg());
+        }
+    }
+
 }

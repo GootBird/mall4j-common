@@ -1,6 +1,7 @@
 package com.xixi.mall.common.security.filter;
 
 import com.xixi.mall.common.core.handle.XssWrapper;
+import com.xixi.mall.common.security.context.AuthUserContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.Ordered;
@@ -15,9 +16,6 @@ import java.io.IOException;
 
 /**
  * 一些简单的安全过滤： xss
- *
- * @author FrozenWatermelon
- * @date 2020/7/11
  */
 @WebFilter(filterName = "xssFilter")
 @Component
