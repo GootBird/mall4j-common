@@ -2,6 +2,7 @@ package com.xixi.mall.common.core.handle;
 
 import cn.hutool.core.util.StrUtil;
 import com.xixi.mall.common.core.enums.ResponseEnum;
+import com.xixi.mall.common.core.exception.ProjectException;
 import com.xixi.mall.common.core.webbase.vo.ServerResponse;
 import io.seata.core.context.RootContext;
 import io.seata.core.exception.TransactionException;
@@ -65,6 +66,20 @@ public class DefaultExceptionHandler {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(ServerResponse.fail(ResponseEnum.HTTP_MESSAGE_NOT_READABLE));
     }
+
+    @ExceptionHandler(ProjectException.class)
+    public ResponseEntity<ServerResponse<Object>> exceptionHandler(ProjectException e) {
+
+        log.error("exceptionHandler", e);
+
+        String[] codeMsg = e.getMessage().split("_");
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(codeMsg.length == 2
+                        ? ServerResponse.fail(codeMsg[0], codeMsg[1])
+                        : ServerResponse.showFailMsg(e.getMessage())
+                );
+    }
+
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ServerResponse<Object>> exceptionHandler(Exception e) throws TransactionException {
