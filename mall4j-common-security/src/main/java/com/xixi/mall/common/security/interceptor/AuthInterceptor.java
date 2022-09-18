@@ -58,7 +58,7 @@ public class AuthInterceptor implements HandlerInterceptor {
     private static final List<String> excludePathPatterns = Arrays.asList(EXTERNAL_URI, DOC_URI);
 
     @Override
-    public boolean preHandle(HttpServletRequest req, HttpServletResponse resp, Object handle) throws Exception {
+    public boolean preHandle(HttpServletRequest req, HttpServletResponse resp, Object handle) {
 
         String reqUri = req.getRequestURI();
 

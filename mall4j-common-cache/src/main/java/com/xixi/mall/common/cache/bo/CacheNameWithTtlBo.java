@@ -14,8 +14,14 @@ import lombok.ToString;
 @AllArgsConstructor
 public class CacheNameWithTtlBo {
 
+    /**
+     * 缓存key
+     */
     private String cacheName;
 
+    /**
+     * 过期时间
+     */
     private Integer ttl;
 
 }
