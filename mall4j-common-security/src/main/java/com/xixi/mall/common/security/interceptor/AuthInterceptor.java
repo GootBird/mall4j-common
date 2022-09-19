@@ -11,6 +11,7 @@ import com.xixi.mall.api.rabc.feign.PermissionFeignClient;
 import com.xixi.mall.common.core.enums.ResponseEnum;
 import com.xixi.mall.common.core.feign.FeignInsideAuthConfig;
 import com.xixi.mall.common.core.utils.IpHelper;
+import com.xixi.mall.common.core.utils.SpringContextUtils;
 import com.xixi.mall.common.core.utils.ThrowUtils;
 import com.xixi.mall.common.core.webbase.vo.ServerResponse;
 import com.xixi.mall.common.security.annotations.FeignAuthenticate;
@@ -18,12 +19,10 @@ import com.xixi.mall.common.security.annotations.SkipAuthenticate;
 import com.xixi.mall.common.security.context.AuthUserContext;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.lang.annotation.Annotation;
@@ -33,17 +32,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Slf4j
-@Component
 public class AuthInterceptor implements HandlerInterceptor {
-
-    @Resource
-    private PermissionFeignClient permissionFeignClient;
-
-    @Resource
-    private FeignInsideAuthConfig feignInsideAuthConfig;
-
-    @Resource
-    private TokenFeignClient tokenFeignClient;
 
     /**
      * 外部直接调用接口，无需登录权限 unwanted auth
@@ -85,7 +74,7 @@ public class AuthInterceptor implements HandlerInterceptor {
         }
 
         // 校验token，并返回用户信息
-        ServerResponse<UserInfoInTokenBo> checkResponse = tokenFeignClient
+        ServerResponse<UserInfoInTokenBo> checkResponse = SpringContextUtils.getBean(TokenFeignClient.class)
                 .checkToken(accessToken);
 
         ThrowUtils.throwErr(checkResponse);
@@ -121,13 +110,14 @@ public class AuthInterceptor implements HandlerInterceptor {
             return true;
         }
 
-        ServerResponse<Boolean> checkResponse = permissionFeignClient.checkPermission(
-                userInfoInToken.getUserId(),
-                userInfoInToken.getSysType(),
-                uri,
-                userInfoInToken.getIsAdmin(),
-                HttpMethodEnum.valueOf(method.toUpperCase()).getValue()
-        );
+        ServerResponse<Boolean> checkResponse = SpringContextUtils.getBean(PermissionFeignClient.class)
+                .checkPermission(
+                        userInfoInToken.getUserId(),
+                        userInfoInToken.getSysType(),
+                        uri,
+                        userInfoInToken.getIsAdmin(),
+                        HttpMethodEnum.valueOf(method.toUpperCase()).getValue()
+                );
 
         ThrowUtils.throwErr(checkResponse);
 
@@ -142,6 +132,7 @@ public class AuthInterceptor implements HandlerInterceptor {
      */
     private boolean feignRequestCheck(HttpServletRequest req) {
 
+        FeignInsideAuthConfig feignInsideAuthConfig = SpringContextUtils.getBean(FeignInsideAuthConfig.class);
         String feignInsideSecret = req.getHeader(feignInsideAuthConfig.getKey());
 
         // 校验feign 请求携带的key 和 value是否正确
