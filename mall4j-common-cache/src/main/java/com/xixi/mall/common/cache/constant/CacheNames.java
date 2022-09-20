@@ -9,7 +9,9 @@ public interface CacheNames extends RbacCacheNames
         , MultishopCacheNames
         , PlatformCacheNames
         , BizCacheNames
-        , UserCacheNames {
+        , UserCacheNames
+        , ConfigCacheNames
+        , OrderCacheNames {
 
     /**
      * 参考CacheKeyPrefix
