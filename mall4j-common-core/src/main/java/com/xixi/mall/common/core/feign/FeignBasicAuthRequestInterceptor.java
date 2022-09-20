@@ -33,6 +33,7 @@ public class FeignBasicAuthRequestInterceptor implements RequestInterceptor {
         }
         HttpServletRequest request = attributes.getRequest();
         String authorization = request.getHeader("Authorization");
+        log.info("feign token:{}", authorization);
 
         if (StrUtil.isNotBlank(authorization)) {
             template.header("Authorization", authorization);
