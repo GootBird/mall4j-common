@@ -109,10 +109,11 @@ public class ThrowUtils {
      *
      * @param serverResponse resp
      */
-    public static void throwErr(ServerResponse<?> serverResponse) {
+    public static <T> ServerResponse<T> throwErr(ServerResponse<T> serverResponse) {
         if (serverResponse.unSuccess()) {
             throwErr(serverResponse.getCode(), serverResponse.getMsg());
         }
+        return serverResponse;
     }
 
 }
