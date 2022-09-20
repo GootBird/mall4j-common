@@ -124,10 +124,7 @@ public class ThrowUtils {
      * @return data
      */
     public static <T> T checkResAndGetData(ServerResponse<T> serverResponse) {
-        if (serverResponse.unSuccess()) {
-            throwErr(serverResponse.getCode(), serverResponse.getMsg());
-        }
-        return serverResponse.getData();
+        return checkResAndGet(serverResponse).getData();
     }
 
 
