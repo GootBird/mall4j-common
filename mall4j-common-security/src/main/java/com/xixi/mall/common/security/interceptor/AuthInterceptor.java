@@ -40,11 +40,16 @@ public class AuthInterceptor implements HandlerInterceptor {
     private static final String EXTERNAL_URI = "/**/ua/**";
 
     /**
+     * error
+     */
+    private static final String ERR_URI = "/error";
+
+    /**
      * swagger
      */
     private static final String DOC_URI = "/v2/api-docs";
 
-    private static final List<String> excludePathPatterns = Arrays.asList(EXTERNAL_URI, DOC_URI);
+    private static final List<String> excludePathPatterns = Arrays.asList(ERR_URI, EXTERNAL_URI, DOC_URI);
 
     @Override
     public boolean preHandle(HttpServletRequest req, HttpServletResponse resp, Object handle) {
