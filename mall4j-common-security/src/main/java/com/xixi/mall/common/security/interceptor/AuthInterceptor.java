@@ -13,7 +13,6 @@ import com.xixi.mall.common.core.feign.FeignInsideAuthConfig;
 import com.xixi.mall.common.core.utils.IpHelper;
 import com.xixi.mall.common.core.utils.SpringContextUtils;
 import com.xixi.mall.common.core.utils.ThrowUtils;
-import com.xixi.mall.common.core.webbase.vo.ServerResponse;
 import com.xixi.mall.common.security.annotations.FeignAuthenticate;
 import com.xixi.mall.common.security.annotations.SkipAuthenticate;
 import com.xixi.mall.common.security.context.AuthUserContext;
@@ -79,12 +78,9 @@ public class AuthInterceptor implements HandlerInterceptor {
         }
 
         // 校验token，并返回用户信息
-        ServerResponse<UserInfoInTokenBo> checkResponse = SpringContextUtils.getBean(TokenFeignClient.class)
-                .checkToken(accessToken);
-
-        ThrowUtils.throwErr(checkResponse);
-
-        UserInfoInTokenBo userInfoInToken = checkResponse.getData();
+        UserInfoInTokenBo userInfoInToken = ThrowUtils.checkResAndGetData(
+                SpringContextUtils.getBean(TokenFeignClient.class).checkToken(accessToken)
+        );
 
         // 需要用户角色权限，就去根据用户角色权限判断是否
         if (!checkRbac(userInfoInToken, reqUri, req.getMethod())) {
@@ -115,18 +111,15 @@ public class AuthInterceptor implements HandlerInterceptor {
             return true;
         }
 
-        ServerResponse<Boolean> checkResponse = SpringContextUtils.getBean(PermissionFeignClient.class)
-                .checkPermission(
+        return ThrowUtils.checkResAndGetData(
+                SpringContextUtils.getBean(PermissionFeignClient.class).checkPermission(
                         userInfoInToken.getUserId(),
                         userInfoInToken.getSysType(),
                         uri,
                         userInfoInToken.getIsAdmin(),
                         HttpMethodEnum.valueOf(method.toUpperCase()).getValue()
-                );
-
-        ThrowUtils.throwErr(checkResponse);
-
-        return checkResponse.getData();
+                )
+        );
     }
 
     /**
