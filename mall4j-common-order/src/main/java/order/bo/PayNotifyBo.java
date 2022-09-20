@@ -14,7 +14,7 @@ import java.util.List;
 @Getter
 @ToString
 @AllArgsConstructor
-public class PayNotifyBO {
+public class PayNotifyBo {
 
     private List<Long> orderIds;
 

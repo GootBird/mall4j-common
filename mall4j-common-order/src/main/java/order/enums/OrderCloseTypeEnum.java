@@ -1,4 +1,4 @@
-package order.constant;
+package order.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,7 +8,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum OrderCloseType {
+public enum OrderCloseTypeEnum {
 
     /**
      * 超时未支付

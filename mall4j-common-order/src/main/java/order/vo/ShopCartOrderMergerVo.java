@@ -16,7 +16,7 @@ import java.util.List;
 @Getter
 @ToString
 @Accessors(chain = true)
-public class ShopCartOrderMergerVO {
+public class ShopCartOrderMergerVo {
 
     @ApiModelProperty(value = "商品总值", required = true)
     private Long total;
@@ -28,10 +28,10 @@ public class ShopCartOrderMergerVO {
     private Integer dvyType;
 
     @ApiModelProperty(value = "过滤掉的商品项", required = true)
-    private List<ShopCartItemVO> filterShopItems;
+    private List<ShopCartItemVo> filterShopItems;
 
     @ApiModelProperty(value = "每个店铺的订单信息", required = true)
-    List<ShopCartOrderVO> shopCartOrders;
+    List<ShopCartOrderVo> shopCartOrders;
 
     @ApiModelProperty(value = "用户地址")
     private UserAddrVo userAddr;

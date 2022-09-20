@@ -16,7 +16,7 @@ import java.util.Date;
 @Getter
 @ToString
 @Accessors(chain = true)
-public class ShopCartItemVO implements Serializable {
+public class ShopCartItemVo implements Serializable {
 
     @ApiModelProperty(value = "加入购物车时间", required = true)
     private Date createTime;

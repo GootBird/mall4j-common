@@ -14,7 +14,7 @@ import java.util.List;
 @Setter
 @Getter
 @ToString
-public class ShopCartOrderVO implements Serializable {
+public class ShopCartOrderVo implements Serializable {
 
     @ApiModelProperty(value = "店铺id", required = true)
     private Long shopId;
@@ -26,7 +26,7 @@ public class ShopCartOrderVO implements Serializable {
     private Long total;
 
     @ApiModelProperty(value = "购物车商品", required = true)
-    private List<ShopCartItemVO> shopCartItemVO;
+    private List<ShopCartItemVo> shopCartItemVO;
 
     @ApiModelProperty(value = "商品总数", required = true)
     private Integer totalCount;

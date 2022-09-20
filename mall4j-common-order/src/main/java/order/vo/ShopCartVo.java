@@ -15,7 +15,7 @@ import java.util.List;
 @Getter
 @ToString
 @Accessors(chain = true)
-public class ShopCartVO {
+public class ShopCartVo {
 
     @ApiModelProperty(value = "店铺ID", required = true)
     private Long shopId;
@@ -27,7 +27,7 @@ public class ShopCartVO {
     private Integer shopType;
 
     @ApiModelProperty("购物车商品信息")
-    private List<ShopCartItemVO> shopCartItem;
+    private List<ShopCartItemVo> shopCartItem;
 
     @ApiModelProperty(value = "商品总值", required = true)
     private Long total;
