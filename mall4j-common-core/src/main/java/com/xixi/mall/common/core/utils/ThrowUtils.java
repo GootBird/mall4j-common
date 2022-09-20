@@ -109,11 +109,26 @@ public class ThrowUtils {
      *
      * @param serverResponse resp
      */
-    public static <T> ServerResponse<T> throwErr(ServerResponse<T> serverResponse) {
+    public static <T> ServerResponse<T> checkResAndGet(ServerResponse<T> serverResponse) {
         if (serverResponse.unSuccess()) {
             throwErr(serverResponse.getCode(), serverResponse.getMsg());
         }
         return serverResponse;
     }
+
+    /**
+     * 检查res并获取res数据
+     *
+     * @param serverResponse resp
+     * @param <T>            data
+     * @return data
+     */
+    public static <T> T checkResAndGetData(ServerResponse<T> serverResponse) {
+        if (serverResponse.unSuccess()) {
+            throwErr(serverResponse.getCode(), serverResponse.getMsg());
+        }
+        return serverResponse.getData();
+    }
+
 
 }
